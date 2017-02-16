@@ -2,7 +2,6 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "pumpkincarving:blocks/pumpkin_1",
       "top": "blocks/pumpkin_top",
       "side": "blocks/pumpkin_side"
     },
@@ -10,33 +9,33 @@
     "transform": "forge:default-block"
   },
   "variants": {
+      "face": {
+      "0": {
+        "textures": {
+          "front": "pumpkincarving:blocks/pumpkin_1"
+        }
+      },
+      "1": {
+        "textures": {
+          "front": "pumpkincarving:blocks/pumpkin_2"
+        }
+      },
+      "2": {
+        "textures": {
+          "front": "pumpkincarving:blocks/pumpkin_3"
+        }
+      },
+      "3": {
+        "textures": {
+          "front": "pumpkincarving:blocks/pumpkin_4"
+        }
+      }
+    },
     "facing": {
       "north": { },
       "east": { "y": 90 },
       "south": { "y": 180 },
       "west": { "y": 270 }
-    },
-    "face": {
-      "1": {
-        "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_1"
-        }
-      },
-      "2": {
-        "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_2"
-        }
-      },
-      "3": {
-        "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_3"
-        }
-      },
-      "4": {
-        "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_4"
-        }
-      }
     }
   }
 }

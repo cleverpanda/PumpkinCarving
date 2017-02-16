@@ -35,7 +35,7 @@ public class PumpkinCarving {
 
 	public static final String MODID = "pumpkincarving";
 	public static final String NAME = "Pumpkin Carving";
-	public static final String VERSION = "0.1";
+	public static final String VERSION = "0.1.0";
 	
 	public static Block carvedPumpkin = new BlockCarvedPumpkin();
 	public static Block carvedPumpkinLit = new BlockCarvedPumpkin().setLightLevel(1.0F);
@@ -51,8 +51,8 @@ public class PumpkinCarving {
 		
 		if (event.getSide() == Side.CLIENT) {
 			for(int i = 0; i<4; i++){
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkin), i,new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "carvedpumpkin"), "face="+i+",facing=north"));
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkinLit), i,new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "litcarvedpumpkin"), "face="+i+",facing=north"));
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkin), i, new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "carvedpumpkin"), "face="+ i +",facing=north"));
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkinLit), i, new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "litcarvedpumpkin"), "face="+ i +",facing=north"));
 			}
 		}
 	}
@@ -61,18 +61,19 @@ public class PumpkinCarving {
 	public void Init(FMLInitializationEvent event) {
 		
 		
-
+		Item pumpkin = Item.getItemFromBlock(carvedPumpkin);
+		Item pumpkinlit = Item.getItemFromBlock(carvedPumpkinLit);
 		removeRecipe(Item.getItemFromBlock(Blocks.LIT_PUMPKIN));
 		
 		for(int m = 0; m<4; m++){
-			GameRegistry.addRecipe(new ItemStack(carvedPumpkinLit, 1,m), new Object[] {"A", "B", 'A', new ItemStack(carvedPumpkin,1,m), 'B', Blocks.TORCH});
+			GameRegistry.addRecipe(new ItemStack(pumpkinlit, 1,m), new Object[] {"A", "B", 'A', new ItemStack(pumpkin,1,m), 'B', Blocks.TORCH});
 		}
 		
 		
-		GameRegistry.addRecipe(new ItemStack(carvedPumpkin,1,0), new Object[] {"  ", "BA", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
-		GameRegistry.addRecipe(new ItemStack(carvedPumpkin,1,1), new Object[] {"B ", " A", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
-		GameRegistry.addRecipe(new ItemStack(carvedPumpkin,1,2), new Object[] {" B", " A", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
-		GameRegistry.addRecipe(new ItemStack(carvedPumpkin,1,3), new Object[] {" A", " B", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
+		GameRegistry.addRecipe(new ItemStack(pumpkin,1,0), new Object[] {"  ", "BA", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
+		GameRegistry.addRecipe(new ItemStack(pumpkin,1,1), new Object[] {"B ", " A", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
+		GameRegistry.addRecipe(new ItemStack(pumpkin,1,2), new Object[] {" B", " A", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
+		GameRegistry.addRecipe(new ItemStack(pumpkin,1,3), new Object[] {" A", " B", 'A', Blocks.PUMPKIN, 'B', Items.SHEARS});
 		
 		
 		GameRegistry.addRecipe(new ItemStack(Items.PUMPKIN_SEEDS, 4), new Object[] {"M", 'M', carvedPumpkin});
@@ -85,7 +86,7 @@ public class PumpkinCarving {
 		block.setRegistryName(name);
 		block.setUnlocalizedName(block.getRegistryName().getResourceDomain() + "." + name);
 		GameRegistry.register(block);
-		final ItemBlock itemBlock = new ItemBlock(block);
+		final ItemBlock itemBlock = new ItemBlockPumpkin(block);
 		itemBlock.setRegistryName(name);
 		itemBlock.setUnlocalizedName(block.getRegistryName().getResourceDomain() + "." + name);
 		GameRegistry.register(itemBlock);
