@@ -9,7 +9,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.BlockWorldState;
@@ -44,9 +43,9 @@ public class BlockCarvedPumpkin extends BlockHorizontal
     private BlockPattern golemPattern;
     private static final Predicate<IBlockState> IS_PUMPKIN = new Predicate<IBlockState>()
     {
-        public boolean apply(@Nullable IBlockState p_apply_1_)
+        public boolean apply(@Nullable IBlockState state)
         {
-            return p_apply_1_ != null && (p_apply_1_.getBlock() == PumpkinCarving.carvedPumpkin || p_apply_1_.getBlock() == PumpkinCarving.carvedPumpkinLit);
+            return state != null && (state.getBlock() == PumpkinCarving.carvedPumpkin || state.getBlock() == PumpkinCarving.carvedPumpkinLit);
         }
     };
     
@@ -176,14 +175,14 @@ public class BlockCarvedPumpkin extends BlockHorizontal
     public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         
-    	return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(FACE, Integer.valueOf((meta&15)>>2));
+    	return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(FACE, meta);
     }
     
     
 
     @Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos,EnumFacing facing, float hitX, float hitY, float hitZ, int meta,EntityLivingBase placer, ItemStack stack) {
-    	IBlockState newstate = this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(FACE, Integer.valueOf((meta&15)>>2));
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, ItemStack stack) {
+    	IBlockState newstate = this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(FACE, meta);
     	System.out.println(meta);
     	
     	return newstate;
@@ -196,9 +195,16 @@ public class BlockCarvedPumpkin extends BlockHorizontal
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-    	IBlockState newstate = this.getDefaultState().withProperty(FACE, Integer.valueOf((meta & 15) >> 2)).withProperty(FACING, EnumFacing.getHorizontal(meta % 4));
-    	//System.out.println(meta+":"+((meta & 15) >> 2));
-    	return newstate;
+    	return getDefaultState().withProperty(FACE, getActualMeta(meta)).withProperty(FACING, EnumFacing.getHorizontal(meta % 4));
+    }
+    
+    public int getActualMeta(int meta)
+    { // returns the FACE value for given meta.
+    	if(meta >= 0 && meta <= 3) return 0;
+    	else if(meta >= 4 && meta <= 7) return 1;
+    	else if(meta >= 8 && meta <= 11) return 2;
+    	else if(meta >= 12 && meta <= 15) return 3;
+    	else return 0;
     }
     
     @Override
@@ -213,13 +219,7 @@ public class BlockCarvedPumpkin extends BlockHorizontal
      */
     public int getMetaFromState(IBlockState state)
     {
-    	
-    	int a = ((EnumFacing)state.getValue(FACING)).getHorizontalIndex();
-    	int b = ((Integer)state.getValue(FACE)).intValue() << 2;
-        
-        
-        System.out.println(state + "_Meta:" + (a+b));
-        return a+b;
+    	return (state.getValue(FACING).getHorizontalIndex() + state.getValue(FACE) * 4);
     }
     
     
@@ -230,9 +230,9 @@ public class BlockCarvedPumpkin extends BlockHorizontal
         //list.add(new ItemStack(itemIn));
 
         	list.add(new ItemStack(itemIn, 1, 0));
-        	list.add(new ItemStack(itemIn, 1, 4));
-        	list.add(new ItemStack(itemIn, 1, 8));
-        	list.add(new ItemStack(itemIn, 1, 12));
+        	list.add(new ItemStack(itemIn, 1, 1));
+        	list.add(new ItemStack(itemIn, 1, 2));
+        	list.add(new ItemStack(itemIn, 1, 3));
 
     }
 
