@@ -1,0 +1,37 @@
+{
+    "conditions": [{
+        "type": "minecraft:item_exists",
+        "item": "pumpkincarving:carvedpumpkin"
+    }],
+  "type":"pumpkincarving:shaped_shears",
+  "mirrored": false,
+  "pattern": [
+
+    "B ",
+
+    "A "
+
+  ],
+
+  "key": {
+
+    "A": {
+
+      "item": "minecraft:pumpkin"
+    },
+
+    "B": {
+
+      "item": "minecraft:shears",
+      "data": 32767
+    }
+
+  },
+
+  "result": {
+
+    "item": "pumpkincarving:carvedpumpkin",
+    "data": 2
+  }
+
+}
