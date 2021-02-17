@@ -12,22 +12,22 @@
       "face": {
       "0": {
         "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_1_lit"
+          "front": "blocks/pumpkin_face_on"
         }
       },
       "1": {
         "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_2_lit"
+          "front": "pumpkincarving:blocks/pumpkin_1_lit"
         }
       },
       "2": {
         "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_3_lit"
+          "front": "pumpkincarving:blocks/pumpkin_2_lit"
         }
       },
       "3": {
         "textures": {
-          "front": "pumpkincarving:blocks/pumpkin_4_lit"
+          "front": "pumpkincarving:blocks/pumpkin_3_lit"
         }
       }
     },

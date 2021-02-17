@@ -1,0 +1,26 @@
+{
+   "conditions":[
+      {
+         "type":"minecraft:item_exists",
+         "item":"pumpkincarving:litcarvedpumpkin2"
+      }
+   ],
+   "type":"minecraft:crafting_shaped",
+   "pattern":[
+      "A",
+      "B"
+   ],
+   "key":{
+      "A":{
+         "item":"pumpkincarving:carvedpumpkin2",
+         "data":2
+      },
+      "B":{
+         "item":"minecraft:torch"
+      }
+   },
+   "result":{
+      "item":"pumpkincarving:litcarvedpumpkin2",
+      "data":2
+   }
+}

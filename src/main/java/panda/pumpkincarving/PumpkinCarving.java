@@ -27,32 +27,44 @@ public class PumpkinCarving {
 
 	public static final String MODID = "pumpkincarving";
 	public static final String NAME = "Pumpkin Carving";
-	public static final String VERSION = "1.4.0";
-	
+	public static final String VERSION = "1.5.0";
+
 	public static final Block carvedPumpkin = new BlockCarvedPumpkin();
 	public static final Block carvedPumpkinLit = new BlockCarvedPumpkin().setLightLevel(1.0F);
-
+	public static final Block carvedPumpkin2 = new BlockCarvedPumpkin();
+	public static final Block carvedPumpkinLit2 = new BlockCarvedPumpkin().setLightLevel(1.0F);
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		addBlock(carvedPumpkin,"carvedpumpkin");
-		addBlock(carvedPumpkinLit,"litcarvedpumpkin");
-		
+		addBlock(carvedPumpkin, "carvedpumpkin");
+		addBlock(carvedPumpkinLit, "litcarvedpumpkin");
+		addBlock(carvedPumpkin2, "carvedpumpkin2");
+		addBlock(carvedPumpkinLit2, "litcarvedpumpkin2");
+
 		if (event.getSide() == Side.CLIENT) {
-			for(int i = 0; i < 4; i++){
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkin), i, new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "carvedpumpkin"), "face="+ i +",facing=north"));
-				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkinLit), i, new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "litcarvedpumpkin"), "face="+ i +",facing=north"));
+			for (int i = 0; i < 4; i++) {
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkin), i,
+						new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "carvedpumpkin"),
+								"face=" + i + ",facing=north"));
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkinLit), i,
+						new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "litcarvedpumpkin"),
+								"face=" + i + ",facing=north"));
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkin2), i,
+						new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "carvedpumpkin2"),
+								"face=" + i + ",facing=north"));
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(carvedPumpkinLit2), i,
+						new ModelResourceLocation(new ResourceLocation(PumpkinCarving.MODID, "litcarvedpumpkin2"),
+								"face=" + i + ",facing=north"));
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
-	  public static void registerRecipes(Register<IRecipe> event) {
-	    IRecipe recipe = CraftingManager.getRecipe(new ResourceLocation("minecraft:lit_pumpkin"));
-		if (recipe != null)
-		{
+	public static void registerRecipes(Register<IRecipe> event) {
+		IRecipe recipe = CraftingManager.getRecipe(new ResourceLocation("minecraft:lit_pumpkin"));
+		if (recipe != null) {
 			event.getRegistry().register(new FakeRecipe(recipe));
-		}	  
+		}
 	}
 
 	private static Block addBlock(Block block, String name) {
@@ -68,5 +80,5 @@ public class PumpkinCarving {
 		ForgeRegistries.ITEMS.register(itemBlock);
 		return block;
 	}
-	
+
 }
